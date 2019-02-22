@@ -7,6 +7,7 @@
       @focus="focused = true" 
       @blur="focused = false" 
       :options="Object.assign(cmOption, { mode })"
+      :placeholder="title + ' code here.'"
     ></codemirror>
   </div>
 </template>
@@ -17,6 +18,7 @@
   import 'codemirror/mode/javascript/javascript.js'
   import 'codemirror/mode/xml/xml.js'
   import 'codemirror/mode/css/css.js'
+  import 'codemirror/addon/display/placeholder.js'
   import 'codemirror/addon/selection/active-line.js'
 
   export default {
@@ -63,6 +65,12 @@
   }
   .CodeMirror-activeline-background {
     background-color: #D2D2D2;
+  }
+  .CodeMirror-empty { 
+    color: darkgray;
+  }
+  .CodeMirror-empty.CodeMirror-focused {
+    color: lightgray; 
   }
 
   .panel-title {
