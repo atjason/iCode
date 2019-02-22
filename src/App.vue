@@ -9,14 +9,14 @@
 
       <div class="html-container" :class="{ hide: !showHtml }" :style="{ 'flex-basis': htmlHeight }">
         <span class="panel-title">html</span>
-        <editor :value="htmlStr" mode='xml' @update="value => htmlStr = value"></editor>
+        <code-editor :value="htmlStr" mode='xml' @update="value => htmlStr = value"></code-editor>
       </div>
   
       <div class="separator separator-vertical" @mousedown="onDragStart('left')"></div>
 
       <div class="js-container" :class="{ hide: !showJS }" :style="{ 'flex-basis': `calc(100% - ${htmlHeight})` }">
         <span class="panel-title">js</span>
-        <editor :value="jsStr" mode='js' @update="value => jsStr = value"></editor>
+        <code-editor :value="jsStr" mode='js' @update="value => jsStr = value"></code-editor>
       </div>      
     </div>
 
@@ -30,7 +30,7 @@
       >
       <div class="css-container" :class="{ hide: !showCSS }" :style="{ 'flex-basis': cssHeight }">
         <span class="panel-title">css</span>
-        <editor :value="cssStr" mode='css' @update="value => cssStr = value"></editor>
+        <code-editor :value="cssStr" mode='css' @update="value => cssStr = value"></code-editor>
       </div>
 
       <div class="separator separator-vertical" @mousedown="onDragStart('right')" @mousemove="onDragging"></div>
@@ -62,7 +62,7 @@
     }
   }
 
-  import editor from './components/Editor.vue'
+  import codeEditor from './components/Editor.vue'
   import htmlPreview from './components/Preview.vue'
 
   export default {
@@ -87,7 +87,7 @@
       }
     },
     components: {
-      editor,
+      codeEditor,
       htmlPreview,
     },
     mounted: function() {
