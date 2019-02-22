@@ -78,7 +78,7 @@
       optionModal,
     },
     mounted: function() {
-      var allItems = CodeStorage.fetchAll()
+      const allItems = CodeStorage.fetchAll()
       for (let key in allItems) {
         this[key] = allItems[key]
       }
@@ -126,12 +126,12 @@
       },
       onDragEnd: function(source) {
         if (this.draggingSeparator !== 'middle' || (this.draggingSeparator && source !== 'leave')) {
-          var map = {
+          const map = {
             left: 'htmlHeight',
             right: 'cssHeight',
             middle: 'leftWidth',
           }
-          var key = map[this.draggingSeparator]
+          const key = map[this.draggingSeparator]
           CodeStorage.save({[key]: this[key]})
 
           this.draggingSeparator = ''

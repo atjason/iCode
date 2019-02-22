@@ -21,7 +21,7 @@
         if (Vue.prototype.$options.autoRender) this.render();
       },
       render: function() {
-        var htmlSource = `
+        const htmlSource = `
           <!DOCTYPE html>
           <html>
           <head>
@@ -36,7 +36,7 @@
           </body>
           </html>
         `
-        var iframeDoc = document.getElementById('iframe').contentDocument
+        const iframeDoc = document.getElementById('iframe').contentDocument
         iframeDoc.open()
         iframeDoc.write(htmlSource)
         iframeDoc.close()
