@@ -7,7 +7,7 @@
       @input="update" 
       @focus="focused = true" 
       @blur="focused = false" 
-      :options="Object.assign(cmOption, { mode })"
+      :options="Object.assign(cmOption, { mode, autofocus: mode === 'xml' })"
       :placeholder="title + ' code here.'"
     ></codemirror>
   </div>
