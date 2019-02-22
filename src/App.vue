@@ -36,8 +36,8 @@
       <div class="separator separator-vertical" @mousedown="onDragStart('right')" @mousemove="onDragging"></div>
       
       <div class="iframe-container" :class="{ hide: !showPreview }" :style="{ 'flex-basis': `calc(100% - ${cssHeight})` }">
-        <iframe id='iframe'></iframe>
-      </div>      
+        <html-preview ref='htmlPreview' :html-str='htmlStr' :js-str='jsStr' :css-str='cssStr'></html-preview>
+      </div>
     </div>
   </div>
 </template>
@@ -63,6 +63,7 @@
   }
 
   import editor from './components/Editor.vue'
+  import htmlPreview from './components/Preview.vue'
 
   export default {
     data: function(){
@@ -78,7 +79,6 @@
         showJS: true,
         showPreview: true,
         draggingSeparator: '',
-        autoRender: false,
 
         cmOption: {
           tabSize: 2,
@@ -88,18 +88,21 @@
     },
     components: {
       editor,
+      htmlPreview,
     },
     mounted: function() {
       var code = codeStorage.fetch()
       keyList.forEach(key => this[key] = code[key])
-      this.render()
+      setTimeout(() => {
+        this.render()
+      }, 300)
       
       document.onkeydown = this.onKeyDown
     },
     watch: {
-      htmlStr:  function() { this.saveAndRender({ htmlStr: this.htmlStr }) },
-      cssStr:   function() { this.saveAndRender({ cssStr: this.cssStr }) },
-      jsStr:    function() { this.saveAndRender({ jsStr: this.jsStr}) },
+      htmlStr:  function() { codeStorage.save({ htmlStr: this.htmlStr }) },
+      cssStr:   function() { codeStorage.save({ cssStr: this.cssStr }) },
+      jsStr:    function() { codeStorage.save({ jsStr: this.jsStr}) },
     },
     methods: {
       onKeyDown: function(e) {
@@ -143,30 +146,8 @@
           this.draggingSeparator = ''
         }
       },
-      saveAndRender: function(obj) {
-        codeStorage.save(obj)
-        if (this.autoRender) this.render()
-      },
       render: function() {
-        var htmlSource = `
-          <!DOCTYPE html>
-          <html>
-          <head>
-            <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-            <style> body { font-family: sans-serif; }</style>
-            <style>${this.cssStr}</style>
-          </head>
-          <body>
-            ${this.htmlStr || `<span style="color: #888">Preview here.</span>`}
-            <script>${this.jsStr}<\/script>
-          </body>
-          </html>
-        `
-        var iframeDoc = document.getElementById('iframe').contentDocument
-        iframeDoc.open()
-        iframeDoc.write(htmlSource)
-        iframeDoc.close()
+        this.$refs.htmlPreview.render()
       }
     }
   }
