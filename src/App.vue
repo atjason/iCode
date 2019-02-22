@@ -1,6 +1,6 @@
 <template>
   <div class="page" id="app">
-    <div class="left-container" 
+    <div class="left-container" :class="{ hide: !showHtml && !showJS }"
         @mousemove="onDragging"
         @mouseup="onDragEnd"
         @mouseleave="onDragEnd('leave')"
@@ -20,7 +20,7 @@
 
     <div class="separator separator-horizotal" @mousedown="onDragStart('middle')" @mouseup="onDragEnd"></div>
 
-    <div class="right-container"
+    <div class="right-container" :class="{ hide: !showCSS && !showPreview }"
         @mousemove="onDragging"
         @mouseup="onDragEnd"
         @mouseleave="onDragEnd('leave')"
