@@ -1,5 +1,5 @@
 <template>
-  <iframe id='iframe'></iframe>
+  <iframe id='iframe' :style="{ 'pointer-events': disableMouse ? 'none' : 'inherit' }"></iframe>
 </template>
 
 <script>
@@ -10,6 +10,7 @@
       htmlStr: String,
       cssStr: String,
       jsStr: String,
+      disableMouse: Boolean,
     },
     watch: {
       htmlStr:  function() { this.renderIfNecessary() },

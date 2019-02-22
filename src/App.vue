@@ -33,7 +33,11 @@
       <div class="separator separator-vertical" @mousedown="onDragStart('right')" @mousemove="onDragging"></div>
       
       <div class="iframe-container" :class="{ hide: !showPreview }" :style="{ 'flex-basis': `calc(100% - ${cssHeight})` }">
-        <html-preview ref='htmlPreview' :html-str='htmlStr' :js-str='jsStr' :css-str='cssStr'></html-preview>
+        <html-preview 
+          ref='htmlPreview' 
+          :html-str='htmlStr' :js-str='jsStr' :css-str='cssStr' 
+          :disable-mouse="Boolean(draggingSeparator)">
+        </html-preview>
       </div>
     </div>
 
