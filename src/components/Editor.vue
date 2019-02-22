@@ -1,7 +1,8 @@
 <template>
-  <div>
+  <div class="container">
     <span class="panel-title" v-show="focused">{{ title }}</span>
-    <codemirror 
+    <codemirror
+      class="editor"
       :value="value" 
       @input="update" 
       @focus="focused = true" 
@@ -48,8 +49,14 @@
 </script>
 
 <style>
+  .container,
+  .editor {
+    width: 100%;
+    height: 100%;
+  }
   .CodeMirror {
     font-size: 1.2rem;
+    height: 100%;
     background-color: #D2D2D2;
   }
   .CodeMirror-focused {
