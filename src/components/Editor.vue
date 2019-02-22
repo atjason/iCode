@@ -58,6 +58,7 @@
     font-size: 1.2rem;
     height: 100%;
     background-color: #D2D2D2;
+    transition: background-color 0.3s ease;
   }
   .CodeMirror-focused {
     background-color: white;
@@ -72,6 +73,7 @@
   }
   .CodeMirror-activeline-background {
     background-color: #D2D2D2;
+    transition: background-color 0.3s ease;
   }
   .CodeMirror-empty { 
     color: darkgray;
