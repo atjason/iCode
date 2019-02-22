@@ -56,6 +56,8 @@
   import Vue from 'vue'
   Vue.prototype.$options = {}
 
+  let lastActiveElement
+
   export default {
     data: function(){
       return {
@@ -117,6 +119,7 @@
       },
 
       onDragStart: function(draggingSeparator) {
+        lastActiveElement = document.activeElement
         this.draggingSeparator = draggingSeparator
       },
       onDragging: function(e) {
@@ -139,6 +142,7 @@
           CodeStorage.save({[key]: this[key]})
 
           this.draggingSeparator = ''
+          lastActiveElement.focus()
         }
       },
 

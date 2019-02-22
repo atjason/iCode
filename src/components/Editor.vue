@@ -55,7 +55,7 @@
     height: 100%;
   }
   .CodeMirror {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     height: 100%;
     background-color: #D2D2D2;
     transition: background-color 0.3s ease;
