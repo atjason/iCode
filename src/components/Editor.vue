@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="edit-container">
     <span class="panel-title" v-show="focused">{{ title }}</span>
     <codemirror
       class="editor"
@@ -49,7 +49,7 @@
 </script>
 
 <style>
-  .container,
+  .edit-container,
   .editor {
     width: 100%;
     height: 100%;
