@@ -7,7 +7,9 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
-    "vue": "^2.6.6"
+    "codemirror": "^5.44.0",
+    "vue": "^2.6.6",
+    "vue-codemirror": "^4.0.6"
   },
   "devDependencies": {
     "@vue/cli-service": "^3.4.0",
