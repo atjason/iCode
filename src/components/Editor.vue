@@ -1,5 +1,14 @@
 <template>
-  <codemirror :value="value" @input="update" :options="Object.assign(cmOption, {mode})"></codemirror>
+  <div>
+    <span class="panel-title" v-show="focused">{{ title }}</span>
+    <codemirror 
+      :value="value" 
+      @input="update" 
+      @focus="focused = true" 
+      @blur="focused = false" 
+      :options="Object.assign(cmOption, { mode })"
+    ></codemirror>
+  </div>
 </template>
 
 <script>
@@ -12,11 +21,13 @@
 
   export default {
     props: {
+      title: String,
       value: String,
       mode: String,
     },
     data: function() {
       return {
+        focused: false,
         cmOption: {
           tabSize: 2,
           styleActiveLine: true,
@@ -52,5 +63,20 @@
   }
   .CodeMirror-activeline-background {
     background-color: #D2D2D2;
+  }
+
+  .panel-title {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    margin: 4px;
+    padding: 2px 5px;
+
+    color: gray;
+    background-color: white;
+    border: solid 1px rgb(209, 227, 250);
+    border-radius: 4px;
+
+    z-index: 2;
   }
 </style>

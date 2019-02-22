@@ -8,15 +8,13 @@
       >
 
       <div class="html-container" :class="{ hide: !showHtml }" :style="{ 'flex-basis': htmlHeight }">
-        <span class="panel-title">html</span>
-        <code-editor :value="htmlStr" mode='xml' @update="value => htmlStr = value"></code-editor>
+        <code-editor :value="htmlStr" mode='xml' title='html' @update="value => htmlStr = value"></code-editor>
       </div>
   
       <div class="separator separator-vertical" @mousedown="onDragStart('left')"></div>
 
       <div class="js-container" :class="{ hide: !showJS }" :style="{ 'flex-basis': `calc(100% - ${htmlHeight})` }">
-        <span class="panel-title">js</span>
-        <code-editor :value="jsStr" mode='js' @update="value => jsStr = value"></code-editor>
+        <code-editor :value="jsStr" mode='js' title='js' @update="value => jsStr = value"></code-editor>
       </div>      
     </div>
 
@@ -29,8 +27,7 @@
         :style="{ 'flex-basis': `calc(100% - ${leftWidth})` }"
       >
       <div class="css-container" :class="{ hide: !showCSS }" :style="{ 'flex-basis': cssHeight }">
-        <span class="panel-title">css</span>
-        <code-editor :value="cssStr" mode='css' @update="value => cssStr = value"></code-editor>
+        <code-editor :value="cssStr" mode='css' title='css' @update="value => cssStr = value"></code-editor>
       </div>
 
       <div class="separator separator-vertical" @mousedown="onDragStart('right')" @mousemove="onDragging"></div>
@@ -54,13 +51,16 @@
         htmlStr: '',
         cssStr: '',
         jsStr: '',
+
         htmlHeight: '50%',
         cssHeight: '50%',
         leftWidth: '50%',
+
         showHtml: true,
         showCSS: true,
         showJS: true,
         showPreview: true,
+
         draggingSeparator: '',
       }
     },
@@ -101,6 +101,7 @@
           e.preventDefault()
         }
       },
+
       onDragStart: function(draggingSeparator) {
         this.draggingSeparator = draggingSeparator
       },
@@ -126,6 +127,7 @@
           this.draggingSeparator = ''
         }
       },
+
       render: function() {
         this.$refs.htmlPreview.render()
       }
@@ -134,14 +136,6 @@
 </script>
 
 <style>
-  * {
-    box-sizing: border-box;
-  }
-
-  body {
-    font-family: sans-serif;
-  }
-
   .page {
     position: absolute;
     left: 0;
@@ -208,21 +202,6 @@
     width: 100%;
     height: 6px;
     top: -2px;
-  }
-
-  .panel-title {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    padding: 2px 5px;
-
-    color: #F0F0F0;
-    background-color: #1285DA;
-    border-radius: 4px;
-    opacity: 0.3;
-
-    z-index: 2;
-    display: none;
   }
 
   .hide {
