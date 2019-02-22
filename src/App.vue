@@ -96,9 +96,9 @@
       document.onkeydown = this.onKeyDown
     },
     watch: {
-      htmlStr:  function() { CodeStorage.save({ htmlStr: this.htmlStr }) },
-      cssStr:   function() { CodeStorage.save({ cssStr: this.cssStr }) },
-      jsStr:    function() { CodeStorage.save({ jsStr: this.jsStr}) },
+      htmlStr:  function() { CodeStorage.save({ htmlStr: this.htmlStr || '' }) },
+      cssStr:   function() { CodeStorage.save({ cssStr: this.cssStr || '' }) },
+      jsStr:    function() { CodeStorage.save({ jsStr: this.jsStr || '' }) },
     },
     methods: {
       onKeyDown: function(e) {
@@ -132,17 +132,19 @@
         }
       },
       onDragEnd: function(source) {
-        if (this.draggingSeparator !== 'middle' || (this.draggingSeparator && source !== 'leave')) {
+        if (!this.draggingSeparator) return
+
+        if (this.draggingSeparator !== 'middle' || source !== 'leave') {
           const map = {
             left: 'htmlHeight',
             right: 'cssHeight',
             middle: 'leftWidth',
           }
           const key = map[this.draggingSeparator]
-          CodeStorage.save({[key]: this[key]})
+          if (key) CodeStorage.save({[key]: this[key]})
 
           this.draggingSeparator = ''
-          lastActiveElement.focus()
+          if (lastActiveElement) lastActiveElement.focus()
         }
       },
 
