@@ -47,7 +47,7 @@
 
 <style>
   .CodeMirror {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     background-color: #D2D2D2;
   }
   .CodeMirror-focused {
@@ -67,10 +67,12 @@
 
   .panel-title {
     position: absolute;
-    top: 4px;
-    right: 4px;
+    top: 5px;
+    right: 6px;
     margin: 4px;
-    padding: 2px 5px;
+    padding: 1px 2px;
+
+    font-size: 0.85rem;
 
     color: gray;
     background-color: white;
