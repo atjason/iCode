@@ -79,11 +79,6 @@
         showJS: true,
         showPreview: true,
         draggingSeparator: '',
-
-        cmOption: {
-          tabSize: 2,
-          styleActiveLine: true,
-        },
       }
     },
     components: {
@@ -228,17 +223,6 @@
     width: 100%;
     height: 6px;
     top: -2px;
-  }
-
-  iframe {
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-  }
-
-  iframe {
-    border: none;
   }
 
   .panel-title {
