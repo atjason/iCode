@@ -44,26 +44,9 @@
 
 <script>
 
-  var StorageKeyPrefix = 'CodeHere_'
-  var keyList = ['htmlStr', 'cssStr', 'jsStr', 'htmlHeight', 'cssHeight', 'leftWidth']
-  var codeStorage = {
-    fetch: function() {
-      var code = {}
-      for (let key of keyList) {
-        code[key] = localStorage.getItem(StorageKeyPrefix + key) || ''
-      }
-      return code
-    },
-    save: function(obj) {
-      if (!obj) return
-      for (let key in obj) {
-        localStorage.setItem(StorageKeyPrefix + key, obj[key])
-      }
-    }
-  }
-
   import codeEditor from './components/Editor.vue'
   import htmlPreview from './components/Preview.vue'
+  import CodeStorage from './utils/util.js'
 
   export default {
     data: function(){
@@ -86,8 +69,10 @@
       htmlPreview,
     },
     mounted: function() {
-      var code = codeStorage.fetch()
-      keyList.forEach(key => this[key] = code[key])
+      var allItems = CodeStorage.fetchAll()
+      for (let key in allItems) {
+        this[key] = allItems[key]
+      }
       setTimeout(() => {
         this.render()
       }, 300)
@@ -95,9 +80,9 @@
       document.onkeydown = this.onKeyDown
     },
     watch: {
-      htmlStr:  function() { codeStorage.save({ htmlStr: this.htmlStr }) },
-      cssStr:   function() { codeStorage.save({ cssStr: this.cssStr }) },
-      jsStr:    function() { codeStorage.save({ jsStr: this.jsStr}) },
+      htmlStr:  function() { CodeStorage.save({ htmlStr: this.htmlStr }) },
+      cssStr:   function() { CodeStorage.save({ cssStr: this.cssStr }) },
+      jsStr:    function() { CodeStorage.save({ jsStr: this.jsStr}) },
     },
     methods: {
       onKeyDown: function(e) {
@@ -136,7 +121,7 @@
             middle: 'leftWidth',
           }
           var key = map[this.draggingSeparator]
-          codeStorage.save({[key]: this[key]})
+          CodeStorage.save({[key]: this[key]})
 
           this.draggingSeparator = ''
         }

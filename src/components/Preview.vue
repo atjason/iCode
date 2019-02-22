@@ -3,6 +3,8 @@
 </template>
 
 <script>
+  import CodeStorage from '../utils/util.js'
+
   export default {
     props: {
       htmlStr: String,
@@ -11,7 +13,7 @@
     },
     data: function() {
       return {
-        autoRender: false,
+        autoRender: CodeStorage.fetch('autoRender'),
       }
     },
     watch: {
