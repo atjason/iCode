@@ -42,14 +42,7 @@
       }
     },
     mounted: function() {
-      let autoRender = CodeStorage.fetch('autoRender')
-      if (autoRender === undefined) {
-        autoRender = true
-        Vue.prototype.$options.autoRender = true
-      } else {
-        autoRender = (autoRender == 'true')
-      }
-      this.autoRender = autoRender
+      this.autoRender = CodeStorage.fetch('autoRender') == 'true'
     },
     watch: {
       autoRender: function() {

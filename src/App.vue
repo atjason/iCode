@@ -84,6 +84,8 @@
       optionModal,
     },
     mounted: function() {
+      this.initAutoRender()
+
       const allItems = CodeStorage.fetchAll()
       for (let key in allItems) {
         this[key] = allItems[key]
@@ -150,6 +152,17 @@
 
       render: function() {
         this.$refs.htmlPreview.render()
+      },
+
+      initAutoRender: function() {
+        let autoRender = CodeStorage.fetch('autoRender')
+        if (autoRender === null || autoRender === undefined) {
+          autoRender = true
+          CodeStorage.save({ autoRender })
+        } else {
+          autoRender = (autoRender == 'true')
+        }
+        Vue.prototype.$options.autoRender = autoRender
       }
     }
   }
