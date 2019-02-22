@@ -3,6 +3,7 @@
 </template>
 
 <script>
+  import Vue from 'vue'
   import CodeStorage from '../utils/util.js'
 
   export default {
@@ -11,11 +12,6 @@
       cssStr: String,
       jsStr: String,
     },
-    data: function() {
-      return {
-        autoRender: CodeStorage.fetch('autoRender'),
-      }
-    },
     watch: {
       htmlStr:  function() { this.renderIfNecessary() },
       cssStr:   function() { this.renderIfNecessary() },
@@ -23,7 +19,7 @@
     },
     methods: {
       renderIfNecessary: function() {
-        if (this.autoRender) this.render();
+        if (Vue.prototype.$options.autoRender) this.render();
       },
       render: function() {
         var htmlSource = `

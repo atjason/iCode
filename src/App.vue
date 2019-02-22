@@ -36,14 +36,20 @@
         <html-preview ref='htmlPreview' :html-str='htmlStr' :js-str='jsStr' :css-str='cssStr'></html-preview>
       </div>
     </div>
+
+    <option-modal v-if="showOptions" @close="showOptions = false"></option-modal>
   </div>
 </template>
 
 <script>
-
   import codeEditor from './components/Editor.vue'
   import htmlPreview from './components/Preview.vue'
+  import optionModal from './components/Option.vue'
   import CodeStorage from './utils/util.js'
+
+  // TODO Use better way to communiate among components.
+  import Vue from 'vue'
+  Vue.prototype.$options = {}
 
   export default {
     data: function(){
@@ -62,17 +68,21 @@
         showPreview: true,
 
         draggingSeparator: '',
+        showOptions: true,
       }
     },
     components: {
       codeEditor,
       htmlPreview,
+      optionModal,
     },
     mounted: function() {
       var allItems = CodeStorage.fetchAll()
       for (let key in allItems) {
         this[key] = allItems[key]
       }
+      Vue.prototype.$options.autoRender = allItems.autoRender
+
       setTimeout(() => {
         this.render()
       }, 300)
