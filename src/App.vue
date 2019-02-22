@@ -9,14 +9,14 @@
 
       <div class="html-container" :class="{ hide: !showHtml }" :style="{ 'flex-basis': htmlHeight }">
         <span class="panel-title">html</span>
-        <codemirror v-model="htmlStr" :options="Object.assign(cmOption, {mode: 'xml'})"></codemirror>
+        <editor :value="htmlStr" mode='xml' @update="value => htmlStr = value"></editor>
       </div>
   
       <div class="separator separator-vertical" @mousedown="onDragStart('left')"></div>
 
       <div class="js-container" :class="{ hide: !showJS }" :style="{ 'flex-basis': `calc(100% - ${htmlHeight})` }">
         <span class="panel-title">js</span>
-        <codemirror v-model="jsStr" id='js-editor' :options="Object.assign(cmOption, {mode: 'js'})"></codemirror>
+        <editor :value="jsStr" mode='js' @update="value => jsStr = value"></editor>
       </div>      
     </div>
 
@@ -30,7 +30,7 @@
       >
       <div class="css-container" :class="{ hide: !showCSS }" :style="{ 'flex-basis': cssHeight }">
         <span class="panel-title">css</span>
-        <codemirror v-model="cssStr" :options="Object.assign(cmOption, {mode: 'css'})"></codemirror>
+        <editor :value="cssStr" mode='css' @update="value => cssStr = value"></editor>
       </div>
 
       <div class="separator separator-vertical" @mousedown="onDragStart('right')" @mousemove="onDragging"></div>
@@ -43,7 +43,6 @@
 </template>
 
 <script>
-  // import HelloWorld from './components/HelloWorld.vue'
 
   var StorageKeyPrefix = 'CodeHere_'
   var keyList = ['htmlStr', 'cssStr', 'jsStr', 'htmlHeight', 'cssHeight', 'leftWidth']
@@ -63,15 +62,9 @@
     }
   }
 
-  import { codemirror } from 'vue-codemirror'
-  import 'codemirror/lib/codemirror.css'
-  import 'codemirror/mode/javascript/javascript.js'
-  import 'codemirror/mode/xml/xml.js'
-  import 'codemirror/mode/css/css.js'
-  import 'codemirror/addon/selection/active-line.js'
+  import editor from './components/Editor.vue'
 
   export default {
-    // el: '#app',
     data: function(){
       return {
         htmlStr: '',
@@ -94,7 +87,7 @@
       }
     },
     components: {
-      codemirror
+      editor,
     },
     mounted: function() {
       var code = codeStorage.fetch()
@@ -177,12 +170,6 @@
       }
     }
   }
-  // export default {
-  //   name: 'app',
-  //   components: {
-  //     HelloWorld
-  //   }
-  // }
 </script>
 
 <style>
@@ -291,24 +278,4 @@
   .hide {
     display: none;
   }
-
-  .CodeMirror {
-    font-size: 1.1rem;
-    background-color: #D2D2D2;
-  }
-  .CodeMirror-focused {
-    background-color: white;
-  }
-  .CodeMirror-lines { 
-    padding: 10px;
-  }
-  .CodeMirror-focused .CodeMirror-activeline-background {
-    background-color: #E8F2FF;
-    /* background-color: white;
-    border: solid 1px #EEE; */
-  }
-  .CodeMirror-activeline-background {
-    background-color: #D2D2D2;
-  }
-
 </style>
