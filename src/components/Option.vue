@@ -79,6 +79,16 @@
     box-shadow: 0 0 1px rgba(57,70,78,.15), 0 20px 55px -8px rgba(57,70,78,.25);
   }
 
+  h3 {
+    color: green;
+  }
+  span {
+    font-weight: 200;
+    font-size: 0.9rem;
+    color: #39464e;
+    margin-left: 2px;
+  }
+
   .separator {
     height: 1px;
     width: 100%;
@@ -92,11 +102,12 @@
 
   .td-shortcut-key {
     text-align: right;
+    padding-top: 2px;
+    padding-right: 0;
   }
 
   .shortcut-key {
     font-family: monospace;
-    font-weight: bold;
     padding: 2px 4px;
     border: solid 1px lightgray;
     border-radius: 4px;
