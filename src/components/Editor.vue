@@ -87,7 +87,7 @@
     top: 5px;
     right: 6px;
     margin: 4px;
-    padding: 1px 2px;
+    padding: 1px 4px 1px 5px;
 
     font-size: 0.85rem;
 
