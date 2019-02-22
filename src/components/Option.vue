@@ -31,7 +31,7 @@
   export default {
     data: function() {
       return {
-        autoRender: CodeStorage.fetch('autoRender'),
+        autoRender: false,
         shortcuts: [
           { key: '⌘1', description: 'Show or hide the html editor.' },
           { key: '⌘2', description: 'Show or hide the js editor.' },
@@ -41,16 +41,26 @@
         ]
       }
     },
+    mounted: function() {
+      let autoRender = CodeStorage.fetch('autoRender')
+      if (autoRender === undefined) {
+        autoRender = true
+        Vue.prototype.$options.autoRender = true
+      } else {
+        autoRender = (autoRender == 'true')
+      }
+      this.autoRender = autoRender
+    },
     watch: {
       autoRender: function() {
-        CodeStorage.save('autoRender', { autoRender: this.autoRender })
+        CodeStorage.save({ autoRender: this.autoRender })
         Vue.prototype.$options.autoRender = this.autoRender
       },
     },
   }
 </script>
 
-<style>
+<style scoped>
   .mask {
     position: absolute;
     left: 0;

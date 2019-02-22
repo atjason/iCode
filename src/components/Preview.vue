@@ -4,7 +4,6 @@
 
 <script>
   import Vue from 'vue'
-  import CodeStorage from '../utils/util.js'
 
   export default {
     props: {

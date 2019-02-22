@@ -38,6 +38,7 @@
     </div>
 
     <option-modal v-if="showOptions" @close="showOptions = false"></option-modal>
+    <img class="option" src="./assets/option.png" @click="showOptions = true">
   </div>
 </template>
 
@@ -68,7 +69,7 @@
         showPreview: true,
 
         draggingSeparator: '',
-        showOptions: true,
+        showOptions: false,
       }
     },
     components: {
@@ -81,11 +82,10 @@
       for (let key in allItems) {
         this[key] = allItems[key]
       }
-      Vue.prototype.$options.autoRender = allItems.autoRender
 
       setTimeout(() => {
         this.render()
-      }, 300)
+      }, 600)
       
       document.onkeydown = this.onKeyDown
     },
@@ -216,5 +216,23 @@
 
   .hide {
     display: none;
+  }
+
+  .option {
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    width: 40px;
+    height: 40px;
+    padding: 10px;
+
+    cursor: pointer;
+    opacity: 0.5;
+    transition: all 0.5s ease;
+  }
+
+  .option:hover {
+    opacity: 1;
+    transform: scale(1.4);
   }
 </style>

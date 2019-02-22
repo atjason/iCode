@@ -13,7 +13,7 @@ const CodeStorage = Object.freeze({
   },
 
   fetch: function(key) {
-    return localStorage.getItem(StorageKeyPrefix + key) || ''
+    return localStorage.getItem(StorageKeyPrefix + key)
   },
 
   save: function(obj) {
