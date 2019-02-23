@@ -46,7 +46,7 @@
   }
 </script>
 
-<style>
+<style scoped>
   iframe {
     left: 0;
     top: 0;

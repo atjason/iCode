@@ -48,12 +48,32 @@
   }
 </script>
 
-<style>
+<style scoped>
   .edit-container,
   .editor {
     width: 100%;
     height: 100%;
   }
+
+  .panel-title {
+    position: absolute;
+    top: 5px;
+    right: 6px;
+    margin: 4px;
+    padding: 1px 4px 1px 5px;
+
+    font-size: 0.85rem;
+
+    color: gray;
+    background-color: white;
+    border: solid 1px rgb(209, 227, 250);
+    border-radius: 4px;
+
+    z-index: 2;
+  }
+</style>
+
+<style>
   .CodeMirror {
     font-size: 1.1rem;
     height: 100%;
@@ -80,22 +100,5 @@
   }
   .CodeMirror-empty.CodeMirror-focused {
     color: lightgray; 
-  }
-
-  .panel-title {
-    position: absolute;
-    top: 5px;
-    right: 6px;
-    margin: 4px;
-    padding: 1px 4px 1px 5px;
-
-    font-size: 0.85rem;
-
-    color: gray;
-    background-color: white;
-    border: solid 1px rgb(209, 227, 250);
-    border-radius: 4px;
-
-    z-index: 2;
   }
 </style>

@@ -168,7 +168,7 @@
   }
 </script>
 
-<style>
+<style scoped>
   .page {
     position: absolute;
     left: 0;
