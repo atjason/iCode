@@ -1,18 +1,12 @@
-**iCode**，一款在线 html/css/js 编辑器。
+**iCode**，一款在线 html/css/js 编辑器。[在线示例](https://icode.toolinbox.net/editor/)
 
 ![](https://ws4.sinaimg.cn/large/006tKfTcgy1g0hy7hckl1j30rs0kkagf.jpg)
-
-[在线示例](https://icode.toolinbox.net/editor/)
 
 ## 为什么要创建 iCode？
 
 是的，市面上已经有很多成熟的产品，比如 jsfiddle、codepen 等，为什么要再来一个呢？很简单：**练手** 😂
 
-最近刚学了 css、Vue 开发，满腔热血无处发泄，于是找了 iCode 这个项目。
-
-一方面，这样的项目，可以同时用于 html/css/js/Vue 等技术，非常适合练手；
-
-另一方面，在学习前端知识时，经常要手写一些代码来测试，类似 jsfiddle 这样平台经常被用到。自己开发一个自己之后也会用到的产品，感觉也是不错的。
+一方面，iCode 比较适合练手 css/Vue 等技术，另一方面自己平时也可能会用到 iCode 来测试代码。
 
 ## iCode 有什么特点？
 
