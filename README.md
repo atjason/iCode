@@ -37,4 +37,8 @@ iCode is far away from a mature product:
 - More interface layouts, themes
 - ...
 
+## How to Run?
+
+Just `npm run serve`
+
 Welcome to chat with me~
