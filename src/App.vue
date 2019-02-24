@@ -14,7 +14,7 @@
       <div class="separator separator-vertical" @mousedown="onDragStart('left')"></div>
 
       <div class="js-container" :class="{ hide: !showJS }" :style="{ 'flex-basis': `calc(100% - ${htmlHeight})` }">
-        <code-editor :value="jsStr" mode='js' title='js' @update="value => jsStr = value"></code-editor>
+        <code-editor :value="jsStr" mode='javascript' title='js' @update="value => jsStr = value"></code-editor>
       </div>      
     </div>
 
