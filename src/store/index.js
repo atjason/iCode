@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import CodeStorage from '../utils/util'
+import CodeStorage from '../utils/code-storage.js'
 
 Vue.use(Vuex)
 

@@ -50,7 +50,7 @@
   import codeEditor from './components/Editor.vue'
   import htmlPreview from './components/Preview.vue'
   import optionModal from './components/Option.vue'
-  import CodeStorage from './utils/util.js'
+  import CodeStorage from './utils/code-storage.js'
   import store from './store'
 
   let lastActiveElement
