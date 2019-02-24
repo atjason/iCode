@@ -25,13 +25,9 @@
 </template>
 
 <script>
-  import Vue from 'vue'
-  import CodeStorage from '../utils/util.js'
-
   export default {
     data: function() {
       return {
-        autoRender: false,
         shortcuts: [
           { key: '⌘1', description: 'Show or hide the html editor.' },
           { key: '⌘2', description: 'Show or hide the js editor.' },
@@ -41,15 +37,16 @@
         ]
       }
     },
-    mounted: function() {
-      this.autoRender = CodeStorage.fetch('autoRender') == 'true'
-    },
-    watch: {
-      autoRender: function() {
-        CodeStorage.save({ autoRender: this.autoRender })
-        Vue.prototype.$options.autoRender = this.autoRender
-      },
-    },
+    computed: {
+      autoRender: {
+        get() {
+          return this.$store.getters.autoRender
+        },
+        set(newValue) {
+          this.$store.dispatch('setAutoRender', newValue)
+        }
+      }
+    }
   }
 </script>
 

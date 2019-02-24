@@ -19,7 +19,7 @@
     },
     methods: {
       renderIfNecessary: function() {
-        if (Vue.prototype.$options.autoRender) this.render();
+        if (this.$store.getters.autoRender) this.render();
       },
       render: function() {
         const htmlSource = `
