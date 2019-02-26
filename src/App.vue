@@ -1,5 +1,5 @@
 <template>
-  <div class="page" id="app">
+  <div class="page">
     <div class="left-container" :class="{ hide: !showHtml && !showJS }"
         @mousemove="onDragging"
         @mouseup="onDragEnd"
