@@ -25,29 +25,29 @@
 </template>
 
 <script>
-  export default {
-    data: function() {
-      return {
-        shortcuts: [
-          { key: '⌘1', description: 'Show or hide the html editor.' },
-          { key: '⌘2', description: 'Show or hide the js editor.' },
-          { key: '⌘3', description: 'Show or hide the css editor.' },
-          { key: '⌘4', description: 'Show or hide the previewer.' },
-          { key: '⌘Enter', description: 'Manually run code.' },
-        ]
-      }
-    },
-    computed: {
-      autoRender: {
-        get() {
-          return this.$store.getters.autoRender
-        },
-        set(newValue) {
-          this.$store.dispatch('setAutoRender', newValue)
-        }
+export default {
+  data: function () {
+    return {
+      shortcuts: [
+        { key: '⌘1', description: 'Show or hide the html editor.' },
+        { key: '⌘2', description: 'Show or hide the js editor.' },
+        { key: '⌘3', description: 'Show or hide the css editor.' },
+        { key: '⌘4', description: 'Show or hide the previewer.' },
+        { key: '⌘Enter', description: 'Manually run code.' }
+      ]
+    }
+  },
+  computed: {
+    autoRender: {
+      get () {
+        return this.$store.getters.autoRender
+      },
+      set (newValue) {
+        this.$store.dispatch('setAutoRender', newValue)
       }
     }
   }
+}
 </script>
 
 <style scoped>
@@ -92,7 +92,7 @@
     margin-top: 15px;
     border-bottom: solid 1px #E1E3E4;
   }
-  
+
   .td-shortcut {
     padding: 4px;
   }

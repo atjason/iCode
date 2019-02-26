@@ -5,38 +5,38 @@ import CodeStorage from '../utils/code-storage.js'
 
 Vue.use(Vuex)
 
-function loadOptions() {
+function loadOptions () {
   let autoRender = CodeStorage.fetch('autoRender')
   if (autoRender === null || autoRender === undefined) {
     autoRender = true
     CodeStorage.save({ autoRender })
   } else {
-    autoRender = (autoRender == 'true')
+    autoRender = (autoRender === 'true')
   }
   return { autoRender }
 }
 
 const state = {
   options: {
-    autoRender: loadOptions().autoRender,
+    autoRender: loadOptions().autoRender
   }
 }
 
 const getters = {
-  autoRender({ options }) {
+  autoRender ({ options }) {
     return options.autoRender
   }
 }
 
 const mutations = {
-  setAutoRender({ options }, autoRender) {
+  setAutoRender ({ options }, autoRender) {
     options.autoRender = autoRender
     CodeStorage.save({ autoRender })
   }
 }
 
 const actions = {
-  setAutoRender({ commit }, autoRender) {
+  setAutoRender ({ commit }, autoRender) {
     commit('setAutoRender', autoRender)
   }
 }
@@ -45,5 +45,5 @@ export default new Vuex.Store({
   state,
   getters,
   mutations,
-  actions,
+  actions
 })

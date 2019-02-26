@@ -10,12 +10,12 @@
       <div class="html-container" :class="{ hide: !showHtml }" :style="{ 'flex-basis': htmlHeight }">
         <code-editor :value="htmlStr" mode='xml' title='html' @update="value => htmlStr = value"></code-editor>
       </div>
-  
+
       <div class="separator separator-vertical" @mousedown="onDragStart('left')"></div>
 
       <div class="js-container" :class="{ hide: !showJS }" :style="{ 'flex-basis': `calc(100% - ${htmlHeight})` }">
         <code-editor :value="jsStr" mode='javascript' title='js' @update="value => jsStr = value"></code-editor>
-      </div>      
+      </div>
     </div>
 
     <div class="separator separator-horizotal" @mousedown="onDragStart('middle')" @mouseup="onDragEnd"></div>
@@ -31,11 +31,11 @@
       </div>
 
       <div class="separator separator-vertical" @mousedown="onDragStart('right')" @mousemove="onDragging"></div>
-      
+
       <div class="iframe-container" :class="{ hide: !showPreview }" :style="{ 'flex-basis': `calc(100% - ${cssHeight})` }">
-        <html-preview 
-          ref='htmlPreview' 
-          :html-str='htmlStr' :js-str='jsStr' :css-str='cssStr' 
+        <html-preview
+          ref='htmlPreview'
+          :html-str='htmlStr' :js-str='jsStr' :css-str='cssStr'
           :disable-mouse="Boolean(draggingSeparator)">
         </html-preview>
       </div>
@@ -47,110 +47,110 @@
 </template>
 
 <script>
-  import codeEditor from './components/Editor.vue'
-  import htmlPreview from './components/Preview.vue'
-  import optionModal from './components/Option.vue'
-  import CodeStorage from './utils/code-storage.js'
-  import store from './store'
+import codeEditor from './components/Editor.vue'
+import htmlPreview from './components/Preview.vue'
+import optionModal from './components/Option.vue'
+import CodeStorage from './utils/code-storage.js'
+import store from './store'
 
-  let lastActiveElement
+let lastActiveElement
 
-  export default {
-    store,
-    data: function(){
-      return {
-        htmlStr: '',
-        cssStr: '',
-        jsStr: '',
+export default {
+  store,
+  data: function () {
+    return {
+      htmlStr: '',
+      cssStr: '',
+      jsStr: '',
 
-        htmlHeight: '50%',
-        cssHeight: '50%',
-        leftWidth: '50%',
+      htmlHeight: '50%',
+      cssHeight: '50%',
+      leftWidth: '50%',
 
-        showHtml: true,
-        showCSS: true,
-        showJS: true,
-        showPreview: true,
+      showHtml: true,
+      showCSS: true,
+      showJS: true,
+      showPreview: true,
 
-        draggingSeparator: '',
-        showOptions: false,
+      draggingSeparator: '',
+      showOptions: false
+    }
+  },
+  components: {
+    codeEditor,
+    htmlPreview,
+    optionModal
+  },
+  mounted: function () {
+    const allItems = CodeStorage.fetchAll()
+    for (let key in allItems) {
+      this[key] = allItems[key]
+    }
+
+    setTimeout(() => {
+      this.render()
+    }, 600)
+
+    document.onkeydown = this.onKeyDown
+  },
+  watch: {
+    htmlStr: function () { CodeStorage.save({ htmlStr: this.htmlStr || '' }) },
+    cssStr: function () { CodeStorage.save({ cssStr: this.cssStr || '' }) },
+    jsStr: function () { CodeStorage.save({ jsStr: this.jsStr || '' }) }
+  },
+  methods: {
+    onKeyDown: function (e) {
+      if (!e.metaKey) return
+
+      switch (e.key) {
+        case '1': this.showHtml = !this.showHtml; break
+        case '2': this.showJS = !this.showJS; break
+        case '3': this.showCSS = !this.showCSS; break
+        case '4': this.showPreview = !this.showPreview; break
+        case 'Enter': this.render(); break
+        default: break
+      }
+
+      if (['1', '2', '3', '4', 'Enter'].indexOf(e.key) >= 0) {
+        e.preventDefault()
       }
     },
-    components: {
-      codeEditor,
-      htmlPreview,
-      optionModal,
+
+    onDragStart: function (draggingSeparator) {
+      lastActiveElement = document.activeElement
+      this.draggingSeparator = draggingSeparator
     },
-    mounted: function() {
-      const allItems = CodeStorage.fetchAll()
-      for (let key in allItems) {
-        this[key] = allItems[key]
+    onDragging: function (e) {
+      if (this.draggingSeparator === 'left') {
+        this.htmlHeight = e.y + 'px'
+      } if (this.draggingSeparator === 'right') {
+        this.cssHeight = e.y + 'px'
+      } if (this.draggingSeparator === 'middle') {
+        this.leftWidth = e.x + 'px'
       }
-
-      setTimeout(() => {
-        this.render()
-      }, 600)
-      
-      document.onkeydown = this.onKeyDown
     },
-    watch: {
-      htmlStr:  function() { CodeStorage.save({ htmlStr: this.htmlStr || '' }) },
-      cssStr:   function() { CodeStorage.save({ cssStr: this.cssStr || '' }) },
-      jsStr:    function() { CodeStorage.save({ jsStr: this.jsStr || '' }) },
+    onDragEnd: function (source) {
+      if (!this.draggingSeparator) return
+
+      if (this.draggingSeparator !== 'middle' || source !== 'leave') {
+        const map = {
+          left: 'htmlHeight',
+          right: 'cssHeight',
+          middle: 'leftWidth'
+        }
+        const key = map[this.draggingSeparator]
+        if (key) CodeStorage.save({ [key]: this[key] })
+
+        this.draggingSeparator = ''
+        if (lastActiveElement) lastActiveElement.focus()
+      }
     },
-    methods: {
-      onKeyDown: function(e) {
-        if (!e.metaKey) return
 
-        switch(e.key) {
-          case '1': this.showHtml     = !this.showHtml; break;
-          case '2': this.showJS       = !this.showJS; break;
-          case '3': this.showCSS      = !this.showCSS; break;
-          case '4': this.showPreview  = !this.showPreview; break;
-          case 'Enter': this.render(); break;
-          default: break;
-        }
-
-        if (['1', '2', '3', '4', 'Enter'].indexOf(e.key) >= 0) {
-          e.preventDefault()
-        }
-      },
-
-      onDragStart: function(draggingSeparator) {
-        lastActiveElement = document.activeElement
-        this.draggingSeparator = draggingSeparator
-      },
-      onDragging: function(e) {
-        if (this.draggingSeparator === 'left') {
-          this.htmlHeight = e.y + 'px'
-        } if (this.draggingSeparator === 'right') {
-          this.cssHeight = e.y + 'px'
-        } if (this.draggingSeparator === 'middle') {
-          this.leftWidth = e.x + 'px'
-        }
-      },
-      onDragEnd: function(source) {
-        if (!this.draggingSeparator) return
-
-        if (this.draggingSeparator !== 'middle' || source !== 'leave') {
-          const map = {
-            left: 'htmlHeight',
-            right: 'cssHeight',
-            middle: 'leftWidth',
-          }
-          const key = map[this.draggingSeparator]
-          if (key) CodeStorage.save({[key]: this[key]})
-
-          this.draggingSeparator = ''
-          if (lastActiveElement) lastActiveElement.focus()
-        }
-      },
-
-      render: function() {
-        this.$refs.htmlPreview.render()
-      },
+    render: function () {
+      this.$refs.htmlPreview.render()
     }
   }
+}
 </script>
 
 <style scoped>

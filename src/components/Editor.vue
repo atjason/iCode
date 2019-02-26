@@ -3,10 +3,10 @@
     <span class="panel-title" v-show="focused">{{ title }}</span>
     <codemirror
       class="editor"
-      :value="value" 
-      @input="update" 
-      @focus="focused = true" 
-      @blur="focused = false" 
+      :value="value"
+      @input="update"
+      @focus="focused = true"
+      @blur="focused = false"
       :options="Object.assign(cmOption, { mode, autofocus: title === 'html' })"
       :placeholder="title + ' code here.'"
     ></codemirror>
@@ -14,38 +14,38 @@
 </template>
 
 <script>
-  import { codemirror } from 'vue-codemirror'
-  import 'codemirror/lib/codemirror.css'
-  import 'codemirror/mode/javascript/javascript.js'
-  import 'codemirror/mode/xml/xml.js'
-  import 'codemirror/mode/css/css.js'
-  import 'codemirror/addon/display/placeholder.js'
-  import 'codemirror/addon/selection/active-line.js'
+import { codemirror } from 'vue-codemirror'
+import 'codemirror/lib/codemirror.css'
+import 'codemirror/mode/javascript/javascript.js'
+import 'codemirror/mode/xml/xml.js'
+import 'codemirror/mode/css/css.js'
+import 'codemirror/addon/display/placeholder.js'
+import 'codemirror/addon/selection/active-line.js'
 
-  export default {
-    props: {
-      title: String,
-      value: String,
-      mode: String,
-    },
-    data: function() {
-      return {
-        focused: false,
-        cmOption: {
-          tabSize: 2,
-          styleActiveLine: true,
-        },
-      }
-    },
-    components: {
-      codemirror
-    },
-    methods: {
-      update: function(newValue) {
-        this.$emit('update', newValue)
+export default {
+  props: {
+    title: String,
+    value: String,
+    mode: String
+  },
+  data: function () {
+    return {
+      focused: false,
+      cmOption: {
+        tabSize: 2,
+        styleActiveLine: true
       }
     }
+  },
+  components: {
+    codemirror
+  },
+  methods: {
+    update: function (newValue) {
+      this.$emit('update', newValue)
+    }
   }
+}
 </script>
 
 <style scoped>
@@ -83,7 +83,7 @@
   .CodeMirror-focused {
     background-color: white;
   }
-  .CodeMirror-lines { 
+  .CodeMirror-lines {
     padding: 10px;
   }
   .CodeMirror-focused .CodeMirror-activeline-background {
@@ -95,10 +95,10 @@
     background-color: #D2D2D2;
     transition: background-color 0.3s ease;
   }
-  .CodeMirror-empty { 
+  .CodeMirror-empty {
     color: darkgray;
   }
   .CodeMirror-empty.CodeMirror-focused {
-    color: lightgray; 
+    color: lightgray;
   }
 </style>
