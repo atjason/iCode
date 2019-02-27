@@ -15,12 +15,6 @@
 
 <script>
 import { codemirror } from 'vue-codemirror'
-import 'codemirror/lib/codemirror.css'
-import 'codemirror/mode/javascript/javascript.js'
-import 'codemirror/mode/xml/xml.js'
-import 'codemirror/mode/css/css.js'
-import 'codemirror/addon/display/placeholder.js'
-import 'codemirror/addon/selection/active-line.js'
 
 export default {
   props: {

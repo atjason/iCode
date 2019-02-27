@@ -9,7 +9,8 @@ module.exports = {
     if (!isDev) {
       config.externals = {
         'vue': 'Vue',
-        'vue-router': 'VueRouter'
+        'vue-router': 'VueRouter',
+        'codemirror': 'CodeMirror'
       }
     }
   }
